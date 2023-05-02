@@ -1,0 +1,912 @@
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    >
+<!--Container-->
+<LinearLayout
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layoutDirection="ltr"
+    >
+<!--    Action Bar   -->
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingHorizontal="10dp"
+    android:background="@drawable/shadow"
+    android:elevation="4dp"
+    >
+
+    <LinearLayout
+        android:id="@+id/action_bar"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="20dp"
+        android:layout_weight="1"
+        >
+
+        <ImageView
+            android:id="@+id/arrow_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            app:srcCompat="@drawable/baseline_arrow_back_24"
+            />
+        <TextView
+            android:id="@+id/app_name"
+            android:text="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000"
+            />
+    </LinearLayout>
+        <!--        Target Gpa Button-->
+        <Switch
+            android:id="@+id/switch_to_target_gpa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:text="Target Gpa " />
+
+<!--        End of Target  Gpa Button-->
+
+</LinearLayout>
+<!--End of Action Bar-->
+
+<!--    Gpa Calculator Container-->
+    <LinearLayout
+        android:id="@+id/gpa_calculator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+<!--    Display Screen-->
+    <LinearLayout
+        android:id="@+id/display"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<!--        Box1-->
+        <LinearLayout
+            android:id="@+id/box1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_marginRight="30dp"
+            android:paddingVertical="10dp"
+            >
+
+<!--            Semster Text-->
+            <TextView
+                android:id="@+id/semster_text_view"
+                android:text="Semester GPA"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+<!--            End of Semster Text-->
+
+
+<!--            Semster Gpa TextView-->
+            <TextView
+                android:id="@+id/semster_gpa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:maxLength="5"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginVertical="10dp"
+                />
+<!--            End of Semster Gpa TextView-->
+
+<!--            Container of Semster text and its Value-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+<!--            Semster Credit Hours-->
+            <TextView
+                android:id="@+id/semster_credit_hours_text_view"
+                android:text="Semster Credits : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+<!--            End of Semster Credit Hours-->
+                <TextView
+                    android:id="@+id/semster_credits_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+<!--            End of Container-->
+
+        </LinearLayout>
+<!--        End of Box1-->
+
+<!--        Box2-->
+        <LinearLayout
+            android:id="@+id/box2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:paddingVertical="10dp"
+            >
+
+<!--            Cumulative Text-->
+            <TextView
+                android:id="@+id/cumulative_text_view"
+                android:text="Cumulative GPA"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+<!--            End of  Cumulative Text-->
+
+
+            <!--            Cumulative Gpa TextView-->
+            <TextView
+                android:id="@+id/cumulative_gpa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.0"
+                android:maxLength="5"
+                android:textSize="16sp"
+                android:textColor="#000"
+                android:textStyle="bold"
+                android:layout_marginVertical="10dp"
+                />
+            <!--            End of Cumulative Gpa TextView-->
+
+            <!--            Container of Cumulative text and its Value-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!--            Semster Credit Hours-->
+                <TextView
+                    android:id="@+id/cumulative_credit_hours_text_view"
+                    android:text="Total Credits : "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <!--            End of Cumulative Credit Hours-->
+                <TextView
+                    android:id="@+id/cumulative_credits_hours"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+<!--        End of Box2-->
+    </LinearLayout>
+<!--End of display Screen-->
+
+<!--    Total GPA && Total Credits-->
+    <LinearLayout
+        android:id="@+id/gpa_and_credits"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <EditText
+            android:id="@+id/previous_gpa"
+            android:hint="Previous GPA"
+            android:background="@drawable/input_style"
+            android:maxLength="5"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/total_credits"
+            android:hint="Total Credits Hours"
+            android:maxLength="3"
+            android:background="@drawable/input_style"
+            android:textAlignment="center"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+<!--End of Total GPA and Total Credits-->
+
+<!--    Table Info-->
+
+    <!-- End of Table   -->
+<!--    Buttons Container-->
+
+    <TableLayout
+        android:id="@+id/table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/input_style">
+        <!--    Header Row-->
+        <TableRow
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:background="#000000"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/course_col"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="1"
+                android:layout_weight="1"
+                android:text="Course"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/grade_col"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="2"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Grade"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/credit_col"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_column="3"
+                android:layout_weight="1"
+                android:text="Credit"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </TableRow>
+        <!--    End of Header Row-->
+
+        <!--    Row1-->
+        <TableRow
+            android:id="@+id/row1"
+            android:gravity="center"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:id="@+id/course1"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#1"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade1"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:maxLength="4"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit1"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row1-->
+
+
+        <!--    Row2-->
+        <TableRow
+            android:id="@+id/row2"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#2"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit2"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <!--    End of Row2-->
+
+        <!--    Row3-->
+        <TableRow
+            android:id="@+id/row3"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#3"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit3"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <!--    End of Row3-->
+
+        <!--    Row4-->
+        <TableRow
+            android:id="@+id/row4"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course4"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#4"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade4"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit4"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+
+        <!--    End of Row4-->
+
+        <!--    Row5-->
+        <TableRow
+            android:id="@+id/row5"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course5"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#5"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade5"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit5"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row5-->
+
+        <!--    Row6-->
+        <TableRow
+            android:id="@+id/row6"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course6"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#6"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade6"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit6"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row6-->
+
+        <!--    Row7-->
+        <TableRow
+            android:id="@+id/row7"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course7"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#7"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade7"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit7"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row7-->
+
+        <!--    Row8-->
+        <TableRow
+            android:id="@+id/row8"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course8"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#8"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade8"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit8"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row8-->
+
+
+        <!--    Row9-->
+        <TableRow
+            android:id="@+id/row9"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course9"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#9"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade9"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit9"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row9-->
+
+        <!--    Row10-->
+        <TableRow
+            android:id="@+id/row10"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/course10"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="1"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:gravity="center"
+                android:text="#10"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/grade10"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="2"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Grade"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/credit10"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_column="3"
+                android:layout_marginHorizontal="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/input_style"
+                android:hint="Credit"
+                android:textAlignment="center"
+                android:textSize="14sp" />
+        </TableRow>
+        <!--    End of Row10-->
+    </TableLayout>
+
+    <LinearLayout
+        android:id="@+id/btns_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+        <!--    Insert && Delete Buttons Container-->
+        <LinearLayout
+            android:id="@+id/insert_delete_btns_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--    AddRow Button-->
+            <Button
+                android:id="@+id/insert_row_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="Insert Row"
+                android:textColor="@color/white" />
+            <!--    End of AddRow Button-->
+            <!--    AddRow Button-->
+            <Button
+                android:id="@+id/delete_row_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Delete Row"
+                android:textColor="@color/white" />
+
+
+            <!--    End of AddRow Button-->
+        </LinearLayout>
+        <!--    End of Insert && Delete Buttons Container-->
+
+        <!--   Calculate Button -->
+        <Button
+            android:id="@+id/calculate_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textColor="@color/white" />
+        <!--    End of Calculate Button-->
+
+        <!--    Clear Button-->
+        <Button
+            android:id="@+id/clear_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="clear"
+            android:textColor="@color/white" />
+        <!--    End of Clear Button-->
+    </LinearLayout>
+    <!--    End of Buttons Container-->
+
+</LinearLayout>
+    <!--    End of Gpa Calculator Container-->
+
+<!--    Target Gpa Calculator-->
+    <LinearLayout
+        android:id="@+id/target_gpa_calculator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="25dp"
+        android:visibility="gone"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        >
+
+        <LinearLayout
+            android:id="@+id/text_view_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical">
+        <TextView
+            android:id="@+id/gpa_of_next_semster_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_marginVertical="5dp"
+            />
+        <TextView
+            android:id="@+id/hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:visibility="gone"
+            android:layout_marginVertical="5dp"
+            />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/current_gpa"
+            android:hint="Current GPA"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:background="@drawable/input_style"
+            android:textAlignment="center"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/target_gpa"
+            android:hint="Target GPA"
+            android:maxLength="5"
+            android:maxLines="1"
+            android:background="@drawable/input_style"
+            android:textAlignment="center"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/current_credits"
+            android:hint="Current Credits"
+            android:maxLength="3"
+            android:maxLines="1"
+            android:background="@drawable/input_style"
+            android:textAlignment="center"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/additional_credits"
+            android:hint="Additional Credits"
+            android:maxLines="1"
+            android:background="@drawable/input_style"
+            android:textAlignment="center"
+            android:maxLength="3"
+            android:layout_marginVertical="5dp"
+            android:paddingVertical="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/calculate_target_gpa_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Calculate"
+            android:textColor="@color/white" />
+    </LinearLayout>
+<!--    End of Target Gpa Calculator-->
+</LinearLayout>
+<!--End of Container-->
+</ScrollView>
