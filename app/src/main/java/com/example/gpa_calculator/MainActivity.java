@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -47,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements Methods {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_style, gradesArray);
         adapter2 = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_style, creditsArray);
         adapter.setDropDownViewResource(R.layout.spinner_style);//Set adapter
