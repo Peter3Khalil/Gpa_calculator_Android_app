@@ -2,19 +2,15 @@ package com.example.gpa_calculator;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -28,20 +24,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-import org.xmlpull.v1.XmlPullParser;
-
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
-public class MainActivity extends AppCompatActivity implements Methods {
-    private ArrayList<View> arrayOfViews = new ArrayList<>(10);
-    private static int totalSemesterCredits = 0;
+public class MainActivity extends AppCompatActivity {
+    private final ArrayList<View> arrayOfViews = new ArrayList<>(10);
     private final String errorMessage = "GPA should be smaller than or equal 4";
-    private String[] gradesArray = {"", "A", "-A", "B+", "B", "C+", "C", "D", "F"};
-    private String[] creditsArray = {"1", "2", "3", "4", "5", "6", "7"};
+    private final String[] gradesArray = {"", "A", "-A", "B+", "B", "C+", "C", "D", "F"};
+    private final String[] creditsArray = {"1", "2", "3", "4", "5", "6", "7"};
     private ArrayAdapter<String> adapter, adapter2;
     private EditText prevGpaEditText, totalCreditsEditText;
+    @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch switchBtn;
 
     @Override
@@ -124,9 +116,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         LinearLayout parentOfBtns = (LinearLayout) arrayOfViews.get(3);
         LinearLayout parentOfAddIcon = (LinearLayout) parentOfBtns.getChildAt(0);
         ImageView addIcon = (ImageView) parentOfAddIcon.getChildAt(0);
-        addIcon.setOnClickListener(view -> {
-            addRow();
-        });
+        addIcon.setOnClickListener(view -> addRow());
         //End of Handle Add Row Icon
 
         //Handle Switch  Button
@@ -145,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         //End of Handle Switch Button
 
         //Handle Target Gpa Calculator
-        EditText editText = (EditText) findViewById(R.id.current_gpa);//Current Gpa
+        EditText editText = findViewById(R.id.current_gpa);//Current Gpa
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         TextView errorMsg = findViewById(R.id.error_current_gpa);
         editText.addTextChangedListener(new TextWatcher() {
@@ -175,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
             }
         });
 
-        editText = (EditText) findViewById(R.id.target_gpa);//Target Gpa
+        editText = findViewById(R.id.target_gpa);//Target Gpa
         editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
         TextView errorMsg2 = findViewById(R.id.error_target_gpa);
         editText.addTextChangedListener(new TextWatcher() {
@@ -206,7 +196,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         });
 
 
-        editText = (EditText) findViewById(R.id.current_credits);//Current Credits
+        editText = findViewById(R.id.current_credits);//Current Credits
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -225,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
             }
         });
 
-        editText = (EditText) findViewById(R.id.additional_credits);//Additional Credits
+        editText = findViewById(R.id.additional_credits);//Additional Credits
         editText.setInputType(InputType.TYPE_CLASS_NUMBER);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -253,6 +243,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
     }
 
     //Helper Functions
+    @SuppressLint("SetTextI18n")
     public void rearrangeRows() {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
         TableRow tableRow;
@@ -264,31 +255,27 @@ public class MainActivity extends AppCompatActivity implements Methods {
     }
 
     public double getCurrentGpa() {
-        EditText editText = (EditText) findViewById(R.id.current_gpa);
+        EditText editText = findViewById(R.id.current_gpa);
         String currGpaString = editText.getText().toString();
-        double currentGpaValue = Double.parseDouble("0" + currGpaString);
-        return currentGpaValue;
+        return Double.parseDouble("0" + currGpaString);
     }
 
     public double getTargetGpa() {
-        EditText editText = (EditText) findViewById(R.id.target_gpa);
+        EditText editText = findViewById(R.id.target_gpa);
         String targetGpaString = editText.getText().toString();
-        double targetGpaValue = Double.parseDouble("0" + targetGpaString);
-        return targetGpaValue;
+        return Double.parseDouble("0" + targetGpaString);
     }
 
     public int getCurrentCredits() {
-        EditText editText = (EditText) findViewById(R.id.current_credits);
+        EditText editText = findViewById(R.id.current_credits);
         String currentCredits = editText.getText().toString();
-        int currentCreditsValue = Integer.parseInt("0" + currentCredits);
-        return currentCreditsValue;
+        return Integer.parseInt("0" + currentCredits);
     }
 
     public int getAdditionalCredits() {
-        EditText editText = (EditText) findViewById(R.id.additional_credits);
+        EditText editText = findViewById(R.id.additional_credits);
         String additionalCredits = editText.getText().toString();
-        int additionalCreditsValue = Integer.parseInt("0" + additionalCredits);
-        return additionalCreditsValue;
+        return Integer.parseInt("0" + additionalCredits);
 
     }
 
@@ -297,10 +284,11 @@ public class MainActivity extends AppCompatActivity implements Methods {
         return (targetGpa * totalCredits - currGpa * currCredits) / addCredits;
     }
 
+    @SuppressLint("SetTextI18n")
     public void calculateGpaOfNextSemester() {
         TextView gpaOfNextSemesterTextView = findViewById(R.id.gpa_of_next_semster_text_view);
         TextView hintTextView = findViewById(R.id.hint);
-        int additionalShouldRegister = 0;
+        int additionalShouldRegister;
         boolean condition = getCurrentGpa() <= 4 && getCurrentGpa() != 0 && getTargetGpa() <= 4 && getTargetGpa() != 0 && getCurrentCredits() != 0 && getAdditionalCredits() != 0;
         if (condition) {
             double gpaOfNextSemester = getGpaOfNextSemester(getCurrentGpa(), getTargetGpa(), getCurrentCredits(), getAdditionalCredits());
@@ -334,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         }
     }
 
-    @Override
+
     public double getSemesterGpa() {
         if (getSemesterCredits() == 0) return getSumOfProductGradeAndCredit();
         return getSumOfProductGradeAndCredit() / getSemesterCredits();
@@ -350,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
         TableRow tableRow;
         Spinner credit, grade;
-        String selectedCredit, selectedGrade;
+        String selectedCredit;
         int totalCredits = 0;
         LinearLayout parentOfSpinner;
         for (int i = 1; i < tableLayout.getChildCount(); i++) {
@@ -433,11 +421,11 @@ public class MainActivity extends AppCompatActivity implements Methods {
     }
 
     //End of Helper Functions
-    @Override
+    @SuppressLint("SetTextI18n")
     public void calculate() {
-        double cgpa = 0.0;
-        int totalCredits = 0;
-        if (getPrevGpa() <= 4 && getPrevGpa() != 0) {
+        double cgpa;
+        int totalCredits;
+        if (getPrevGpa() <= 4 && getPrevGpa() != 0 && getPrevTotalCredits()!=0) {
             cgpa = getCumulativeGpa(getPrevGpa(), getPrevTotalCredits(), getSemesterGpa(), getSemesterCredits());
             totalCredits = getTotalCredits();
         } else {
@@ -455,7 +443,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
         textView.setText("" + getSemesterCredits());
     }
 
-    @Override
+    @SuppressLint("SetTextI18n")
     public void addRow() {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -511,11 +499,3 @@ public class MainActivity extends AppCompatActivity implements Methods {
 
 }
 
-interface Methods {
-    public void addRow();
-
-
-    public double getSemesterGpa();
-
-    public void calculate();
-}
