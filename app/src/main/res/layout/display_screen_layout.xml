@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/display_linear_layout"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <!--        Box1-->
+    <LinearLayout
+        android:id="@+id/box1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_marginRight="30dp"
+        android:paddingVertical="10dp"
+        >
+
+        <!--            Semster Text-->
+        <TextView
+            android:text="Semester GPA"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <!--            End of Semster Text-->
+
+
+        <!--            Semster Gpa TextView-->
+        <TextView
+            android:id="@+id/semster_gpa_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:maxLength="5"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginVertical="10dp"
+            />
+        <!--            End of Semster Gpa TextView-->
+
+        <!--            Container of Semster text and its Value-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--            Semster Credit Hours-->
+            <TextView
+                android:text="Semester Credits : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <!--            End of Semster Credit Hours-->
+            <TextView
+                android:id="@+id/semster_credits_hours_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+        <!--            End of Container-->
+
+    </LinearLayout>
+    <!--        End of Box1-->
+
+    <!--        Box2-->
+    <LinearLayout
+        android:id="@+id/box2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"
+        android:layout_marginLeft="30dp"
+        android:paddingVertical="10dp"
+        >
+
+        <!--            Cumulative Text-->
+        <TextView
+            android:text="Cumulative GPA"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#000"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <!--            End of  Cumulative Text-->
+
+
+        <!--            Cumulative Gpa TextView-->
+        <TextView
+            android:id="@+id/cumulative_gpa_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.0"
+            android:maxLength="5"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:layout_marginVertical="10dp"
+            />
+        <!--            End of Cumulative Gpa TextView-->
+
+        <!--            Container of Cumulative text and its Value-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!--            Semster Credit Hours-->
+            <TextView
+                android:text="Total Credits : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <!--            End of Cumulative Credit Hours-->
+            <TextView
+                android:id="@+id/cumulative_credits_hours_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+    </LinearLayout>
+    <!--        End of Box2-->
+</LinearLayout>

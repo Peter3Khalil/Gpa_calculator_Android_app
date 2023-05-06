@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/table"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/input_style">
+    <!--    Header Row-->
+    <TableRow
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:background="@drawable/background_of_header"
+        android:paddingLeft="10dp"
+        android:gravity="center"
+        >
+
+        <TextView
+            android:id="@+id/course_col"
+            android:layout_width="@dimen/width_of_cell"
+            android:layout_height="@dimen/height_of_cell"
+            android:layout_column="1"
+            android:layout_weight="1"
+            android:text="Course"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/grade_col"
+            android:layout_width="@dimen/width_of_cell"
+            android:layout_height="@dimen/height_of_cell"
+            android:layout_column="2"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Grade"
+            android:layout_marginHorizontal="5dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/credit_col"
+            android:layout_width="@dimen/width_of_cell"
+            android:layout_height="@dimen/height_of_cell"
+            android:layout_column="3"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Credit"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/baseline_delete_24"
+            />
+    </TableRow>
+    <!--    End of Header Row-->
+</TableLayout>

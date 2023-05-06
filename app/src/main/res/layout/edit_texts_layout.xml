@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/gpa_and_credits_linear_layout"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <include layout="@layout/edit_text_component" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ErrorErrorErrorErrorErrorErrorErrorErrorError"
+        android:visibility="gone"
+        android:textColor="#DA6363"
+        />
+    <include layout="@layout/edit_text_component"/>
+</LinearLayout>

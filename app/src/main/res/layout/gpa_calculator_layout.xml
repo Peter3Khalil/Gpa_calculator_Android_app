@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/gpa_calculator"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+    <include layout="@layout/display_screen_layout"/>
+    <include layout="@layout/edit_texts_layout"/>
+    <include layout="@layout/table_layout"/>
+    <include layout="@layout/buttons_group"/>
+</LinearLayout>
