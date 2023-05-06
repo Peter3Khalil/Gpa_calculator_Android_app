@@ -2,6 +2,7 @@ package com.example.gpa_calculator;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
     private static int totalSemesterCredits = 0;
     private final String errorMessage = "GPA should be smaller than or equal 4";
     private String[] gradesArray = {"", "A", "-A", "B+", "B", "C+", "C", "D", "F"};
-    private String[] creditsArray = {"1", "2", "3", "4","5","6","7"};
+    private String[] creditsArray = {"1", "2", "3", "4", "5", "6", "7"};
     private ArrayAdapter<String> adapter, adapter2;
     private EditText prevGpaEditText, totalCreditsEditText;
     private Switch switchBtn;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         adapter = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_style, gradesArray);
         adapter2 = new ArrayAdapter<>(getApplicationContext(), R.layout.spinner_style, creditsArray);
         adapter.setDropDownViewResource(R.layout.spinner_style);//Set adapter
@@ -245,6 +247,11 @@ public class MainActivity extends AppCompatActivity implements Methods {
         //End of Handle Target Gpa Calculator
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     //Helper Functions
     public void rearrangeRows() {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
@@ -357,7 +364,7 @@ public class MainActivity extends AppCompatActivity implements Methods {
                 selectedCredit = credit.getSelectedItem().toString();
                 totalCredits += Double.parseDouble("0" + selectedCredit);
                 tableRow.setBackgroundColor(Color.LTGRAY);
-            }else{
+            } else {
                 tableRow.setBackgroundColor(Color.TRANSPARENT);
             }
         }
@@ -500,8 +507,6 @@ public class MainActivity extends AppCompatActivity implements Methods {
         tableLayout.addView(tableRow);
         calculate();
     }
-
-
 
 
 }
