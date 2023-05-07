@@ -24,6 +24,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -147,6 +149,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 calculateGpaOfNextSemester();
+                calculateCGPAIfSemesterGpaEqual();
                 if (!charSequence.toString().isEmpty()) {
                     if (getCurrentGpa() > 4) {
                         errorMsg.setVisibility(View.VISIBLE);
@@ -207,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 calculateGpaOfNextSemester();
+                calculateCGPAIfSemesterGpaEqual();
             }
 
             @Override
@@ -226,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 calculateGpaOfNextSemester();
+                calculateCGPAIfSemesterGpaEqual();
             }
 
             @Override
@@ -235,10 +240,26 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-            //What if Semester GPA =
-                EditText whatIfSemesterGpaEditText = findViewById(R.id.what_if_semester_gpa);
-                whatIfSemesterGpaEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            //End of What if Semester GPA
+        //What if Semester GPA =
+        EditText whatIfSemesterGpaEditText = findViewById(R.id.what_if_semester_gpa);
+        whatIfSemesterGpaEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+        whatIfSemesterGpaEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                calculateCGPAIfSemesterGpaEqual();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        //End of What if Semester GPA
 
         //End of Handle Target Gpa Calculator
     }
@@ -249,6 +270,49 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Helper Functions
+    public void calculateCGPAIfSemesterGpaEqual() {
+        EditText ifSemesterGpaEqualEditText = findViewById(R.id.what_if_semester_gpa);
+        String ifSemesterGpaEqualString = ifSemesterGpaEqualEditText.getText().toString();
+        double ifSemesterGpaEqualValue = Double.parseDouble("0" + ifSemesterGpaEqualString);
+        TextView textView = findViewById(R.id.required_current_gpa);//required Message for Current Gpa
+        if (getCurrentGpa() == 0 && ifSemesterGpaEqualValue != 0) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+        textView = findViewById(R.id.required_current_credits);//required Message for Current Credits
+        if (getCurrentCredits() == 0 && ifSemesterGpaEqualValue != 0) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+        textView = findViewById(R.id.required_next_semester_credits);//required Message for Next Semester Credits
+        if (getAdditionalCredits() == 0 && ifSemesterGpaEqualValue != 0) {
+            textView.setVisibility(View.VISIBLE);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+        textView = findViewById(R.id.cgpa_text_view); // CGPA TextView
+
+        //Start Calculate
+        if (getCurrentGpa() != 0 && getCurrentGpa() <= 4 && getCurrentCredits() != 0 && getAdditionalCredits() != 0 && ifSemesterGpaEqualValue != 0 && ifSemesterGpaEqualValue <= 4) {
+            double cgpa = getCumulativeGpa(getCurrentGpa(), getCurrentCredits(), ifSemesterGpaEqualValue, getAdditionalCredits());
+            String temp = String.valueOf("" + cgpa);
+            if (temp.length() > 5) temp = temp.substring(0, 5);
+
+            textView.setText(temp);
+        } else {
+            textView.setText("0.0");
+        }
+        textView = findViewById(R.id.error_what_if_semester_gpa);
+        if (ifSemesterGpaEqualValue > 4) {
+            textView.setVisibility(View.VISIBLE);
+            textView.setText(errorMessage);
+        } else {
+            textView.setVisibility(View.GONE);
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     public void rearrangeRows() {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
@@ -431,7 +495,7 @@ public class MainActivity extends AppCompatActivity {
     public void calculate() {
         double cgpa;
         int totalCredits;
-        if (getPrevGpa() <= 4 && getPrevGpa() != 0 && getPrevTotalCredits()!=0) {
+        if (getPrevGpa() <= 4 && getPrevGpa() != 0 && getPrevTotalCredits() != 0) {
             cgpa = getCumulativeGpa(getPrevGpa(), getPrevTotalCredits(), getSemesterGpa(), getSemesterCredits());
             totalCredits = getTotalCredits();
         } else {

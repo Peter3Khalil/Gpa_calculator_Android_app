@@ -176,6 +176,13 @@
             android:maxLines="1"
             android:paddingVertical="10dp"
             android:textAlignment="center" />
+        <TextView
+            android:id="@+id/error_what_if_semester_gpa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Peter"
+            android:textColor="#DA6363"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>
