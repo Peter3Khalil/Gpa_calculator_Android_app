@@ -234,6 +234,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+            //What if Semester GPA =
+                EditText whatIfSemesterGpaEditText = findViewById(R.id.what_if_semester_gpa);
+                whatIfSemesterGpaEditText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            //End of What if Semester GPA
+
         //End of Handle Target Gpa Calculator
     }
 

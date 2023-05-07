@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/target_gpa_calculator"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:orientation="vertical"
     android:paddingHorizontal="25dp"
-    android:gravity="center"
-    android:paddingTop="5dp"
-    >
+    android:paddingTop="5dp">
 
     <LinearLayout
         android:id="@+id/text_view_wrapper"
@@ -17,87 +14,168 @@
         android:layout_height="wrap_content"
         android:gravity="left"
         android:orientation="vertical">
+
         <TextView
             android:id="@+id/gpa_of_next_semster_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            android:textColor="#000"
             android:layout_marginVertical="5dp"
-            />
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/hint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:text="Peter"
-            android:visibility="gone"
             android:textColor="#575151"
-            android:textSize="12sp" />
+            android:textSize="12sp"
+            android:visibility="gone" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/current_gpa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/input_style"
         android:hint="Current GPA"
         android:maxLength="5"
         android:maxLines="1"
-        android:background="@drawable/input_style"
-        android:textAlignment="center"
-        android:layout_marginVertical="5dp"
         android:paddingVertical="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textAlignment="center" />
+
     <TextView
         android:id="@+id/error_current_gpa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:text="Peter"
         android:textColor="#DA6363"
+        android:visibility="gone" />
+    <TextView
+        android:id="@+id/required_current_gpa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="required!"
+        android:visibility="gone"
+        android:textColor="#DA6363"
         />
+
     <EditText
         android:id="@+id/target_gpa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/input_style"
         android:hint="Target GPA"
         android:maxLength="5"
         android:maxLines="1"
-        android:background="@drawable/input_style"
-        android:textAlignment="center"
-        android:layout_marginVertical="5dp"
         android:paddingVertical="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:textAlignment="center" />
+
     <TextView
         android:id="@+id/error_target_gpa"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Peter"
-        android:visibility="gone"
         android:textColor="#DA6363"
-        />
+        android:visibility="gone" />
+
     <EditText
         android:id="@+id/current_credits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/input_style"
         android:hint="Current Credits"
         android:maxLength="3"
         android:maxLines="1"
-        android:background="@drawable/input_style"
-        android:textAlignment="center"
-        android:layout_marginVertical="5dp"
         android:paddingVertical="10dp"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/required_current_credits"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="required!"
+        android:visibility="gone"
+        android:textColor="#DA6363"
+        />
 
     <EditText
         android:id="@+id/additional_credits"
-        android:hint="Additional Credits"
-        android:maxLines="1"
-        android:background="@drawable/input_style"
-        android:textAlignment="center"
-        android:maxLength="3"
-        android:layout_marginVertical="5dp"
-        android:paddingVertical="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="5dp"
+        android:background="@drawable/input_style"
+        android:hint="Next Semester Credits"
+        android:maxLength="3"
+        android:maxLines="1"
+        android:paddingVertical="10dp"
+        android:textAlignment="center" />
+    <TextView
+        android:id="@+id/required_next_semester_credits"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="required!"
+        android:textColor="#DA6363"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/background_of_header">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp"
+            >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:text="CGPA " />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="will be = "
+                />
+            <TextView
+                android:id="@+id/cgpa_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:textSize="20sp"
+                android:text="0.0"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/what_if_semester_gpa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:background="@drawable/input_style"
+            android:hint="What if Semester GPA = "
+            android:maxLength="5"
+            android:maxLines="1"
+            android:paddingVertical="10dp"
+            android:textAlignment="center" />
+    </LinearLayout>
 
 </LinearLayout>
