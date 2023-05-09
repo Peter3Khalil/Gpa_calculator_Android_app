@@ -19,7 +19,7 @@
             android:id="@+id/gpa_of_next_semster_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="5dp"
+            android:layout_marginVertical="20dp"
             android:textColor="#000"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -89,7 +89,7 @@
         android:layout_marginVertical="5dp"
         android:background="@drawable/input_style"
         android:hint="Current Credits"
-        android:maxLength="3"
+        android:maxLength="5"
         android:maxLines="1"
         android:paddingVertical="10dp"
         android:textAlignment="center" />
@@ -109,7 +109,7 @@
         android:layout_marginVertical="5dp"
         android:background="@drawable/input_style"
         android:hint="Next Semester Credits"
-        android:maxLength="3"
+        android:maxLength="5"
         android:maxLines="1"
         android:paddingVertical="10dp"
         android:textAlignment="center" />
@@ -133,8 +133,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
-
+        <TextView
+            android:text="What if Next Semester GPA"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:layout_height="wrap_content"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -171,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
             android:background="@drawable/input_style"
-            android:hint="What if Semester GPA = "
+            android:hint="Next Semester GPA"
             android:maxLength="5"
             android:maxLines="1"
             android:paddingVertical="10dp"

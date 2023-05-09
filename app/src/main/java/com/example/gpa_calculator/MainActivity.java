@@ -270,46 +270,71 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Helper Functions
+    public boolean isEditTextEmpty(EditText editText) {
+        return editText.getText().toString().isEmpty();
+    }
+
+    public String getEditTextString(EditText editText) {
+        return editText.getText().toString();
+    }
+
+    public double getEditTextValue(EditText editText) {
+        return Double.parseDouble("0" + getEditTextString(editText));
+    }
+
     public void calculateCGPAIfSemesterGpaEqual() {
-        EditText ifSemesterGpaEqualEditText = findViewById(R.id.what_if_semester_gpa);
-        String ifSemesterGpaEqualString = ifSemesterGpaEqualEditText.getText().toString();
-        double ifSemesterGpaEqualValue = Double.parseDouble("0" + ifSemesterGpaEqualString);
-        TextView textView = findViewById(R.id.required_current_gpa);//required Message for Current Gpa
-        if (getCurrentGpa() == 0 && ifSemesterGpaEqualValue != 0) {
-            textView.setVisibility(View.VISIBLE);
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-        textView = findViewById(R.id.required_current_credits);//required Message for Current Credits
-        if (getCurrentCredits() == 0 && ifSemesterGpaEqualValue != 0) {
-            textView.setVisibility(View.VISIBLE);
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-        textView = findViewById(R.id.required_next_semester_credits);//required Message for Next Semester Credits
-        if (getAdditionalCredits() == 0 && ifSemesterGpaEqualValue != 0) {
-            textView.setVisibility(View.VISIBLE);
-        } else {
-            textView.setVisibility(View.GONE);
-        }
-        textView = findViewById(R.id.cgpa_text_view); // CGPA TextView
+        EditText editText = findViewById(R.id.what_if_semester_gpa);//Semester GPA Edit Text
+        String editTextString = getEditTextString(editText); // semesterGpa String
+        TextView textView = findViewById(R.id.error_what_if_semester_gpa);//Validation Message for Semester Gpa EditText
+        TextView requiredCurrentGpaTextView = findViewById(R.id.required_current_gpa);
+        TextView requiredCurrentCreditsTextView = findViewById(R.id.required_current_credits);
+        TextView requiredNextSemesterCredits = findViewById(R.id.required_next_semester_credits);
 
-        //Start Calculate
-        if (getCurrentGpa() != 0 && getCurrentGpa() <= 4 && getCurrentCredits() != 0 && getAdditionalCredits() != 0 && ifSemesterGpaEqualValue != 0 && ifSemesterGpaEqualValue <= 4) {
-            double cgpa = getCumulativeGpa(getCurrentGpa(), getCurrentCredits(), ifSemesterGpaEqualValue, getAdditionalCredits());
-            String temp = String.valueOf("" + cgpa);
-            if (temp.length() > 5) temp = temp.substring(0, 5);
-
-            textView.setText(temp);
-        } else {
+        //check if Semester Edit Text Is Empty or not
+        if (!isEditTextEmpty(editText)) {
+            //Semester GPA > 4  then Show Validation Message and Not Start Calculation
+            if (getEditTextValue(editText) > 4) {
+                textView.setText(errorMessage);
+                textView.setVisibility(View.VISIBLE);
+            } else {
+                //Semester GPA <=4  then Start Calculate
+                boolean cond = !getEditTextString(findViewById(R.id.current_gpa)).isEmpty()
+                        && getEditTextValue(findViewById(R.id.current_gpa))<=4
+                        && !getEditTextString(findViewById(R.id.current_credits)).isEmpty()
+                        && !getEditTextString(findViewById(R.id.additional_credits)).isEmpty();
+                if (getEditTextString(findViewById(R.id.current_gpa)).isEmpty()) {
+                    requiredCurrentGpaTextView.setVisibility(View.VISIBLE);
+                } else {
+                    requiredCurrentGpaTextView.setVisibility(View.GONE);
+                }
+                if (getEditTextString(findViewById(R.id.current_credits)).isEmpty()) {
+                    requiredCurrentCreditsTextView.setVisibility(View.VISIBLE);
+                } else {
+                    requiredCurrentCreditsTextView.setVisibility(View.GONE);
+                }
+                if (getEditTextString(findViewById(R.id.additional_credits)).isEmpty()) {
+                    requiredNextSemesterCredits.setVisibility(View.VISIBLE);
+                } else {
+                    requiredNextSemesterCredits.setVisibility(View.GONE);
+                }
+                textView.setVisibility(View.GONE);
+                textView = findViewById(R.id.cgpa_text_view);
+                if (cond) {
+                    double cgpa = getCumulativeGpa(getCurrentGpa(), getCurrentCredits(), getEditTextValue(editText), getAdditionalCredits());
+                    String temp = String.valueOf("" + cgpa);
+                    if (temp.length() > 5) temp = temp.substring(0, 5);
+                    textView.setText(temp);
+                }else{
+                    textView.setText("0.0");
+                }
+            }
+        } else {// if Semester GPA isEmpty so remove Validation Message
+            textView.setVisibility(View.GONE);
+            textView = findViewById(R.id.cgpa_text_view);
             textView.setText("0.0");
-        }
-        textView = findViewById(R.id.error_what_if_semester_gpa);
-        if (ifSemesterGpaEqualValue > 4) {
-            textView.setVisibility(View.VISIBLE);
-            textView.setText(errorMessage);
-        } else {
-            textView.setVisibility(View.GONE);
+            requiredCurrentGpaTextView.setVisibility(View.GONE);
+            requiredCurrentCreditsTextView.setVisibility(View.GONE);
+            requiredNextSemesterCredits.setVisibility(View.GONE);
         }
     }
 
@@ -351,23 +376,31 @@ public class MainActivity extends AppCompatActivity {
 
     public double getGpaOfNextSemester(double currGpa, double targetGpa, int currCredits, int addCredits) {
         int totalCredits = currCredits + addCredits;
+        if(addCredits == 0) return 0;
         return (targetGpa * totalCredits - currGpa * currCredits) / addCredits;
     }
 
+    //Need Handling
     @SuppressLint("SetTextI18n")
     public void calculateGpaOfNextSemester() {
         TextView gpaOfNextSemesterTextView = findViewById(R.id.gpa_of_next_semster_text_view);
         TextView hintTextView = findViewById(R.id.hint);
         int additionalShouldRegister;
-        boolean condition = getCurrentGpa() <= 4 && getCurrentGpa() != 0 && getTargetGpa() <= 4 && getTargetGpa() != 0 && getCurrentCredits() != 0 && getAdditionalCredits() != 0;
+
+        boolean condition = getCurrentGpa() <= 4 &&
+                !getEditTextString(findViewById(R.id.current_gpa)).isEmpty()
+                && getTargetGpa() <= 4 && !getEditTextString(findViewById(R.id.target_gpa)).isEmpty()
+                && !getEditTextString(findViewById(R.id.current_credits)).isEmpty()
+                && !getEditTextString(findViewById(R.id.additional_credits)).isEmpty();
         if (condition) {
             double gpaOfNextSemester = getGpaOfNextSemester(getCurrentGpa(), getTargetGpa(), getCurrentCredits(), getAdditionalCredits());
             //Check Gpa
             double top = getCurrentCredits() * (getCurrentGpa() - getTargetGpa());
             double bottom;
             if (gpaOfNextSemester > 4) {
+                //calculate the credits should student register to achieve 4 gpa
                 top = getCurrentCredits() * (getCurrentGpa() - getTargetGpa());
-                if (getTargetGpa() == 4) bottom = 3.99 - 4;
+                if (getTargetGpa() == 4) bottom = 3.999 - 4;
                 else bottom = getTargetGpa() - 4;
                 additionalShouldRegister = (int) (top / bottom);
                 gpaOfNextSemesterTextView.setText("");//Remove Text
@@ -401,6 +434,7 @@ public class MainActivity extends AppCompatActivity {
     public double getCumulativeGpa(double prevGpa, int totalCredits, double semesterGpa, int semesterCredits) {
         double top = semesterGpa * semesterCredits + prevGpa * totalCredits;
         int bottom = totalCredits + semesterCredits;
+        if (bottom == 0) return semesterGpa;
         return top / bottom;
     }
 
@@ -408,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
         TableLayout tableLayout = (TableLayout) arrayOfViews.get(2);
         TableRow tableRow;
         Spinner credit, grade;
-        String selectedCredit;
+        String selectedGrade;
         int totalCredits = 0;
         LinearLayout parentOfSpinner;
         for (int i = 1; i < tableLayout.getChildCount(); i++) {
@@ -417,10 +451,10 @@ public class MainActivity extends AppCompatActivity {
             credit = (Spinner) parentOfSpinner.getChildAt(0);
             parentOfSpinner = (LinearLayout) tableRow.getChildAt(1); //Grade Dropdown
             grade = (Spinner) parentOfSpinner.getChildAt(0);
-            selectedCredit = grade.getSelectedItem().toString();
-            if (!selectedCredit.isEmpty()) {
-                selectedCredit = credit.getSelectedItem().toString();
-                totalCredits += Double.parseDouble("0" + selectedCredit);
+            selectedGrade = grade.getSelectedItem().toString();
+            if (!selectedGrade.isEmpty()) {
+                selectedGrade = credit.getSelectedItem().toString();
+                totalCredits += Double.parseDouble("0" + selectedGrade);
                 tableRow.setBackgroundColor(Color.LTGRAY);
             } else {
                 tableRow.setBackgroundColor(Color.TRANSPARENT);
@@ -495,7 +529,7 @@ public class MainActivity extends AppCompatActivity {
     public void calculate() {
         double cgpa;
         int totalCredits;
-        if (getPrevGpa() <= 4 && getPrevGpa() != 0 && getPrevTotalCredits() != 0) {
+        if (getPrevGpa() <= 4 && !getEditTextString(prevGpaEditText).isEmpty() && !getEditTextString(totalCreditsEditText).isEmpty()) {
             cgpa = getCumulativeGpa(getPrevGpa(), getPrevTotalCredits(), getSemesterGpa(), getSemesterCredits());
             totalCredits = getTotalCredits();
         } else {
@@ -565,7 +599,5 @@ public class MainActivity extends AppCompatActivity {
         tableLayout.addView(tableRow);
         calculate();
     }
-
-
 }
 
